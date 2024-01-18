@@ -1,0 +1,30 @@
+{% extends "reif/base_form.html" %}
+{% load crispy_forms_tags %}
+{% block titulo %}
+    <h1 class="display-5 fw-bold">Cadastro de Usuários</h1>
+{% endblock titulo %}
+{% block corpo %}
+
+
+
+    <form action="" method="POST" class="container px-lg-5 pb-5">
+        {% csrf_token %}
+        <div class="row " style="font-size: x-small">
+            <div class="col-lg-3 col-md-6">
+                {{ form.username|as_crispy_field }}
+                {{ form.email|as_crispy_field }}
+                {{ form.last_name|as_crispy_field }}
+
+
+                {{ form.first_name|as_crispy_field }}
+            </div>
+            <div class="col-lg-3 col-md-6">
+                {{ form.password1|as_crispy_field }}
+                {{ form.password2|as_crispy_field }}
+                <input type="submit" value="Criar Conta" class="btn btn-primary">
+            </div>
+        </div>
+    </form>
+
+
+{% endblock corpo %}
