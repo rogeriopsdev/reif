@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Outros cabeçalhos -->
+
+    <style type="text/css">
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .print-area {
+                page-break-before: auto;
+                page-break-after: auto;
+                page-break-inside: avoid;
+                width: 100vw;
+                height: 100vh;
+                margin: 0;
+                padding: 0;
+                background-image: url('/static/img/carteira_sf.png');
+                background-size: cover;
+                background-position: bottom left;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            /* Se necessário, ajuste as margens e outros estilos para a impressão */
+            @page {
+                size: auto;
+                margin: 0;
+            }
+
+            /* Restante do seu estilo específico para impressão */
+        }
+    </style>
+</head>
+<body>
+{% extends "reif/base_form.html" %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+{% block titulo %}
+    <h1 class="display-5 fw-bold" xmlns="http://www.w3.org/1999/html">Carteirinha</h1>
+{% endblock titulo %}
+{% block corpo %}
+    <div class="row">
+        <div class="col mb-0">
+            <button id="btnImprimir" class="btn btn-success">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                     class="bi bi-file-plus-fill " viewBox="0 0 16 16">
+                    <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2M8.5 6v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 1 0"/>
+                </svg>
+                Imprimir
+            </button>
+        </div>
+    </div>
+
+
+    {% for discente in discentes %}
+        <fieldset class="card col-sm-12 col-md-6 col-lg-3  mt-1 mr-0.5 ml-0.5 rounded-3 print-area"
+                  style="font-size:x-small; width: 323.1045px; height:250px;background-image:url('/static/img/rodape_sf.png');border-radius: 10px; background-size: cover  ">
+
+            <div class="row mt-2" style="height: 100px;">
+                <div class="col-lg-4 mt-0">
+                    <img class="rounded-circle img-fluid" style="height:80px; width: 80px"
+                         src="{{ discente.foto_url }}" alt="foto">
+                </div>
+                <div class="col-8">
+                    <label for="nome" class="font-weight-bold " style="font-size: small">
+                        <div id="nome">{{ discente.nome_discente }}</div>
+                    </label>
+                </div>
+            </div>
+            <div class="row mt-0">
+                <div class="col-lg-6">
+                    <label for="id">id:
+                        <div id="id" class="font-weight-bold text-bg-success rounded-3 p-1">{{ discente.id_discente }}</div>
+                    </label>
+                </div>
+                <div class="col-lg-6">
+                    <label for="matricula">Matrícula:
+                        <div id="matricula">{{ discente.mat_discente }}</div>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+
+                    {% if discente.qr_discente %}
+                        <img class="qr-code  img-thumbnail" src="/{{ discente.qr_discente }}"
+                             alt="Código QR do Discente" style="height:80px; width: 80px">
+                    {% else %}
+                        <p>Sem código QR</p>
+                    {% endif %}
+
+
+                </div>
+
+            </div>
+            <div class="row border-info">
+                <label for="curso" class="col-12 bg-danger text-light">
+                    <div id="curso" class="rounded-3" style="font-size:x-small">{{ discente.id_curso }}</div>
+                </label>
+            </div>
+
+
+
+        </fieldset>
+    {% endfor %}
+
+
+    <script>
+        document.getElementById('btnImprimir').addEventListener('click', function () {
+            var printContent = document.getElementsByClassName('print-area')[0].outerHTML;
+
+            // Obtendo o tamanho do fieldset
+            var printWidth = document.querySelector('.print-area').offsetWidth;
+            var printHeight = document.querySelector('.print-area').offsetHeight;
+            console.log('Largura da área de impressão:', printWidth, 'px');
+            console.log('Altura da área de impressão:', printHeight, 'px');
+
+            var printWindow = window.open('', '_blank');
+            printWindow.document.open();
+            printWindow.document.write('<html><head><title>Imprimir</title>');
+            printWindow.document.write('<style>body{margin:0;} @page {size: ' + printWidth + 'px ' + printHeight + 'px;}</style>');
+            printWindow.document.write('</head><body onload="window.print(); window.onafterprint = function(){window.close();}">');
+            printWindow.document.write(printContent);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+        });
+    </script>
+
+
+{% endblock corpo %}
+</body>
+</html>

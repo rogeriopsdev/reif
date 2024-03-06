@@ -1,0 +1,72 @@
+{% extends "reif/base_form.html" %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+{% block titulo %}
+    <h1 class="display-5 fw-bold">Cadastro de Discente</h1>
+{% endblock titulo %}
+{% block corpo %}
+    <div class=" mt-5">
+        <div class="row justify-content-center">
+
+            <fieldset title="Cadastro de Discente" style="border: solid 2px rgb(0, 0, 6)"
+                      class="col-lg-6 col-xl-6 col-md-6 col-sm-12 p-5 rounded-5 mb-5">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form.nome_discente|as_crispy_field }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.cpf_discente|as_crispy_field }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.mat_discente|as_crispy_field }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.email_discente|as_crispy_field }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.id_campus|as_crispy_field }}
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form.id_curso|as_crispy_field }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.edital_discente|as_crispy_field }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.foto_discente|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {{ form.ref_cafe|as_crispy_field }}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {{ form.ref_almoco|as_crispy_field }}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {{ form.ref_janta|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input type="submit" value="Cadastrar" class="btn btn-warning">
+                        </div>
+                    </div>
+                </form>
+            </fieldset>
+        </div>
+    </div>
+{% endblock corpo %}

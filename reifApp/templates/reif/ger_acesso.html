@@ -1,0 +1,44 @@
+{% extends "reif/base_form.html" %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+{% block titulo %}
+    <h1 class="display-5 fw-bold">Cadastro de Acesso</h1>
+{% endblock titulo %}
+{% block corpo %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+
+            <!--  <div class="col-lg-4 col-md-6 col-sm-12 p-5">
+
+              </div>-->
+            <fieldset title="" style="border: solid 2px rgb(0,0,6)"
+                      class="col-lg-6 col-xl-6 col-md-8 col-sm-12 p-5 rounded-5 mb-5">
+                <form method="POST" enctype="multipart/form-data" class="col-sm-12">
+                    {% csrf_token %}
+                    <div class="row">
+
+                        <div class="col">
+                            <div class="form-group">
+                                {{ form.id_discente|as_crispy_field }}
+                            </div>
+                            <div class="form-group">
+
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="form-group">
+                                {{ form.id_prato|as_crispy_field }}
+                            </div>
+                        </div>
+
+                        <input type="submit" value="Cadastrar" class="btn btn-warning">
+                    </div>
+                </form>
+            </fieldset>
+            <!--  <div class="col-lg-4 col-md-6 col-sm-12 p-5 ">
+
+              </div>-->
+        </div>
+    </div>
+{% endblock corpo %}

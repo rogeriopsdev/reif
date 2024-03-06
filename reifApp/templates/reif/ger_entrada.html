@@ -1,0 +1,32 @@
+{% extends "reif/base_form.html" %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+{% block titulo %}
+    <h1 class="display-5 fw-bold">Entrada </h1>
+{% endblock titulo %}
+{% block corpo %}
+{{ form}}
+<!-- Adicione este script à sua página HTML -->
+<script>
+    // Função para obter a data e hora atuais no formato desejado
+    function getFormattedDateTime() {
+        var now = new Date();
+        var year = now.getFullYear();
+        var month = ('0' + (now.getMonth() + 1)).slice(-2);
+        var day = ('0' + now.getDate()).slice(-2);
+        var hours = ('0' + now.getHours()).slice(-2);
+        var minutes = ('0' + now.getMinutes()).slice(-2);
+
+        return `${year}-${month}-${day}T${hours}:${minutes}`;
+    }
+
+    // Preencher automaticamente o campo 'entrada' ao carregar a página
+    document.addEventListener('DOMContentLoaded', function () {
+        var entradaField = document.getElementById('id_entrada');
+        if (entradaField) {
+            entradaField.value = getFormattedDateTime();
+        }
+    });
+</script>
+
+{% endblock corpo %}

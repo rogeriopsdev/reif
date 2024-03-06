@@ -1,6 +1,40 @@
-input:invalid:required {
-  background-image: linear-gradient(to right, pink, lightgreen);
-}
-label{
-  font-width: bold;;
-}
+body {
+      padding-top: 56px;
+    }
+
+    @media (min-width: 768px) {
+      body {
+        padding-top: 0;
+      }
+      .navbar-nav {
+        padding-left: 15px;
+      }
+      .navbar-toggler {
+        display: none;
+      }
+    }
+
+    .navbar-nav {
+      transition: margin-left 0.5s;
+    }
+
+    .navbar-collapse {
+      overflow: hidden;
+    }
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .print-area {
+                page-break-before: auto;
+                page-break-after: auto;
+                page-break-inside: avoid;
+                height: 280px; /* Ajuste conforme necessário */
+            }
+
+            /* Restante do seu estilo específico para impressão */
+        }
+

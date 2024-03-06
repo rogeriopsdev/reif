@@ -1,0 +1,75 @@
+{% extends "reif/base_form.html" %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+{% block titulo %}
+    <h1 class="display-5 fw-bold">Campi </h1>
+{% endblock titulo %}
+{% block corpo %}
+
+ <div class="row">
+        <div class="col mb-3">
+            <a href="{% url 'cad_campus' %}" class="btn btn-success">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                     class="bi bi-file-plus-fill " viewBox="0 0 16 16">
+                    <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2M8.5 6v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 1 0"/>
+                </svg>
+                Novo Campus
+            </a>
+
+        </div>
+
+    </div>
+    <div class="row justify-content-center">
+
+
+        <fieldset class=" col-sm-12" title="Cadastro de Discente" style="">
+
+            {% csrf_token %}
+            <table class="table table-responsive-sm table-hover table-striped  col-lg-12  col-xl-12 col-md-12 col-sm-12 align-middle "
+                   style="font-size: medium">
+
+                <thead class="table-success  col-sm-12">
+                <tr>
+
+                    <td>Id</td>
+                    <td>Nome Campus</td>
+                    <td>Foto</td>
+
+                    <td class="text-center">Gerenciar</td>
+                </tr>
+                </thead>
+                <tbody class=" col-sm-12">
+                {% for campus in campi %}
+                    <tr>
+
+                        <td>{{ campus.id_campus }}</td>
+                        <td><img class="rounded-circle " src="{{ campus.foto_url }}" alt="logo do curso"></td>
+                        <td>{{ campus.nome_campus}}</td>
+
+
+                        <td class="text-center">
+                            <a style="font-size: small " href="{% url 'editar_campus' campus.id_campus %}"
+                               class="btn btn-warning text-dark">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-arrow-down-up" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                          d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5m-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5"/>
+                                </svg>
+                                Gerenciar
+                            </a>
+                        </td>
+                    </tr>
+
+
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </fieldset>
+
+    </div>
+    <!--  <div class="col-lg-4 col-md-6 col-sm-12 p-5 ">
+
+      </div>-->
+
+{% endblock corpo %}

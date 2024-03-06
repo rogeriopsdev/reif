@@ -1,0 +1,76 @@
+{% extends "reif/base_form.html" %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+{% block titulo %}
+    <h1 class="display-5 fw-bold">Editar de Evento</h1>
+{% endblock titulo %}
+{% block corpo %}
+    <div class=" mt-5">
+        <div class="row justify-content-center">
+
+            <!--  <div class="col-lg-4 col-md-6 col-sm-12 p-5">
+
+              </div>-->
+            <fieldset title="Cadastro de Discente" style="border: solid 2px rgb(0,0,6)"
+                      class="col-lg-6 col-xl-6 col-md-8 col-sm-12 p-5 rounded-5 mb-5">
+                <form method="POST" enctype="multipart/form-data" class="col-sm-12">
+                    {% csrf_token %}
+                    <div class="row">
+                        {{ status }}
+                        <div class="col">
+                            <div class="form-group">
+                                {{ form.nome_evento|as_crispy_field }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.data_inicio|as_crispy_field }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.data_fim|as_crispy_field }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    {{ form.abre|as_crispy_field }}
+                                </div>
+                            </div>
+                            <div class="col">
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', function () {
+                                        var abreField = document.getElementById('{{ form.abre.id_for_label }}');
+                                        var statusDiv = document.createElement('div');
+
+                                        function updateStatus() {
+                                            if (abreField.checked) {
+                                                statusDiv.innerHTML = '<h6 class="btn btn-success">Aberto</h6>';
+                                            } else {
+                                                statusDiv.innerHTML = '<h6 class="btn btn-danger">Fechado</h6>';
+                                            }
+                                        }
+
+                                        updateStatus();
+                                        abreField.addEventListener('change', updateStatus);
+
+                                        var colDiv = document.querySelector('.col:last-child');
+                                        colDiv.appendChild(statusDiv);
+                                    });
+                                </script>
+
+
+                            </div>
+                        </div>
+<input type="submit" value="Salvar" class="btn btn-info">
+
+                    </div>
+
+
+
+        </div>
+        </form>
+        </fieldset>
+        <!--  <div class="col-lg-4 col-md-6 col-sm-12 p-5 ">
+
+          </div>-->
+    </div>
+    </div>
+{% endblock corpo %}
